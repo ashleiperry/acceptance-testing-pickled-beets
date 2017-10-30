@@ -7,7 +7,7 @@ feature "User checks a recipe's deliciousness", %(
 
   Acceptance Criteria:
   [ ] When I visit the root path, I can see a form to submit a recipe name
-  [ ] If I submit a recipe name with "pickled beets" in the name, I am
+  [x] If I submit a recipe name with "pickled beets" in the name, I am
       sent to a "results" page telling me that the recipe is delicious
   [ ] If I submit a recipe name without "pickled beets" in the name, I am
       sent to a "results" page telling me that the recipe is not delicious
@@ -19,6 +19,12 @@ feature "User checks a recipe's deliciousness", %(
 ) do
 
   scenario "user submits a recipe name containing 'pickled beets'" do
+    visit '/'
+    fill_in 'recipe_name', with: 'pickled beets'
+    click_button 'Submit'
+
+
+    expect(page).to have_content("is a delicious recipe!")
 
   end
 
